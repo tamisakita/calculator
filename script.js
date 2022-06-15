@@ -5,6 +5,7 @@ const operators = document.querySelectorAll('[id*=Operator]');
 let newNumber = true;
 let operator;
 let previousNumber;
+let dot;
 
 function updateDisplay(number) {
   if (newNumber) {
@@ -13,8 +14,16 @@ function updateDisplay(number) {
   } else {
     display.textContent += number;
   }
-  
 }
+
+const addDot = (event) => {
+  newNumber = true;
+
+  dot = event.target.textContent;
+  updateDisplay(dot);
+}
+
+document.querySelector('#decimal').addEventListener("click", addDot);
 
 const insertNumber = ({ target }) => {
   updateDisplay(target.textContent);
@@ -67,3 +76,4 @@ const invertSignal = () => {
 }
 
 document.querySelector("#inverter").addEventListener("click", invertSignal);
+
