@@ -1,11 +1,13 @@
 const display = document.getElementById('display');
 const keys = document.querySelectorAll('[id*=key]');
 const operators = document.querySelectorAll('[id*=Operator]');
+const calculator = document.querySelector('.calculator');
 
 let newNumber = true;
 let operator;
 let previousNumber;
 let dot;
+let numDisplayed;
 
 function updateDisplay(number) {
   if (newNumber) {
@@ -16,14 +18,18 @@ function updateDisplay(number) {
   }
 }
 
-const addDot = (event) => {
-  newNumber = true;
+//Implementação da funcionalidade de números decimais.
+const addDecimal = (event) => {
+  numDisplayed = display.textContent.substring(0,11);
 
-  dot = event.target.textContent;
-  updateDisplay(dot);
+  if(!numDisplayed.includes('.') && numDisplayed.length > 0)  {
+    display.textContent = numDisplayed + '.';  
+  } else {
+    display.textContent = '0.';
+  }
 }
 
-document.querySelector('#decimal').addEventListener("click", addDot);
+document.querySelector('#decimal').addEventListener("click", addDecimal);
 
 const insertNumber = ({ target }) => {
   updateDisplay(target.textContent);
